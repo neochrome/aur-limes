@@ -1,0 +1,15 @@
+post_install () {
+	echo "Enabling Instance Metadata Service binding"
+	systemctl restart systemd-networkd
+	echo "Allow binding priveleged ports"
+	setcap 'cap_net_bind_service=+ep' "$(which limes)"
+	echo "See /usr/share/limes/config.example for a skeleton configuration file"
+	echo "For further information, please refer to https://github.com/otm/limes"
+}
+
+pre_remove () {
+	echo "Disabling Instance Metadata Service binding"
+	systemctl restart systemd-networkd
+	echo "Revoke binding of priveleged ports"
+	setcap '-r' "$(which limes)"
+}
