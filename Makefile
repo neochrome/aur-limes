@@ -3,3 +3,6 @@ all:
 
 clean:
 	@rm -rf pkg/ src/ *.log *.pkg.tar.xz config.example limes-*
+
+update-sums:
+	@updpkgsums	
